@@ -2,94 +2,145 @@
 
 @section('content')
 
-<div class="text-center mb-5 scroll-scale-up">
+<div class="py-4">
 
-    <h1>Tentang Kami</h1>
+    <div class="text-center mb-5 scroll-scale-up">
+        <h1 class="fw-bold display-5 text-dark">
+            Tentang Kami
+        </h1>
 
-    <p class="lead">
-        Selamat datang di Teras Mobil 99
-    </p>
-
-</div>
-
-<div class="row scroll-scale-up">
-
-    <div class="col-md-6">
-
-        <h3>Profil Perusahaan</h3>
-
-        <p>
-            Teras Mobil 99 adalah showroom mobil
-            yang menyediakan berbagai pilihan
-            mobil bekas dan baru berkualitas
-            dengan harga terbaik.
+        <p class="lead text-secondary">
+            Selamat datang di
+            <span class="text-danger fw-semibold">
+                Teras Mobil 99
+            </span>
         </p>
-
-        <p>
-            Kami berkomitmen memberikan pelayanan
-            terbaik kepada pelanggan dengan proses
-            transaksi yang aman, cepat, dan terpercaya.
-        </p>
-
     </div>
 
-    <div class="col-md-6">
+    <div class="row g-4 scroll-scale-up">
 
-        <div class="card shadow">
+        <div class="col-lg-7">
 
-            <div class="card-body">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
 
-                <h4>Keunggulan Kami</h4>
+                    <h3 class="fw-bold mb-4">
+                        Profil Perusahaan
+                    </h3>
 
-                <ul>
-                    <li>Mobil Berkualitas</li>
-                    <li>Harga Kompetitif</li>
-                    <li>Proses Cepat</li>
-                    <li>Pelayanan Ramah</li>
-                    <li>Bisa Konsultasi via WhatsApp</li>
-                </ul>
+                    <p class="text-muted">
+                        Teras Mobil 99 adalah showroom mobil yang menyediakan
+                        berbagai pilihan mobil bekas dan baru berkualitas
+                        dengan harga terbaik.
+                    </p>
 
+                    <p class="text-muted mb-0">
+                        Kami berkomitmen memberikan pelayanan terbaik kepada
+                        pelanggan dengan proses transaksi yang aman, cepat,
+                        dan terpercaya.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-5">
+
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+
+                    <h3 class="fw-bold mb-4">
+                        Keunggulan Kami
+                    </h3>
+
+                    <ul class="list-group list-group-flush">
+
+                        <li class="list-group-item">
+                            ✅ Mobil Berkualitas
+                        </li>
+
+                        <li class="list-group-item">
+                            ✅ Harga Kompetitif
+                        </li>
+
+                        <li class="list-group-item">
+                            ✅ Proses Cepat
+                        </li>
+
+                        <li class="list-group-item">
+                            ✅ Pelayanan Ramah
+                        </li>
+
+                        <li class="list-group-item">
+                            ✅ Konsultasi WhatsApp
+                        </li>
+
+                    </ul>
+
+                </div>
             </div>
 
         </div>
 
     </div>
 
-</div>
+    <div class="my-5"></div>
 
-<hr class="my-5">
+    <div class="row g-4 scroll-scale-up">
 
-<div class="row scroll-scale-up">
+        <div class="col-lg-6">
 
-    <div class="col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
 
-        <h3>Kontak</h3>
+                    <h3 class="fw-bold mb-4">
+                        Kontak Kami
+                    </h3>
 
-        <p>
-            📍 Sidoarjo, Jawa Timur
-        </p>
+                    <p class="mb-3">
+                        📍 Sidoarjo, Jawa Timur
+                    </p>
 
-        <p>
-            📞 081234567890
-        </p>
+                    <p class="mb-3">
+                        📞 081234567890
+                    </p>
 
-        <p>
-            ✉️ terasmobil99@gmail.com
-        </p>
+                    <p class="mb-0">
+                        ✉️ terasmobil99@gmail.com
+                    </p>
 
-    </div>
+                </div>
+            </div>
 
-    <div class="col-md-6">
+        </div>
 
-        <h3>Hubungi Kami</h3>
+        <div class="col-lg-6">
 
-        <a href="https://wa.me/6281234567890"
-           target="_blank"
-           class="btn btn-success">
+            <div class="card border-0 shadow-sm bg-danger bg-opacity-10">
+                <div class="card-body p-4">
 
-            Chat WhatsApp
+                    <h3 class="fw-bold mb-3">
+                        Hubungi Kami
+                    </h3>
 
-        </a>
+                    <p class="text-muted">
+                        Tim kami siap membantu Anda dalam proses
+                        pembelian maupun konsultasi kendaraan.
+                    </p>
+
+                    <a href="https://wa.me/6281234567890"
+                       target="_blank"
+                       class="btn btn-danger px-4">
+
+                        Chat WhatsApp
+
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
 
     </div>
 
