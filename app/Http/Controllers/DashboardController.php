@@ -6,6 +6,8 @@ use App\Models\Mobil;
 use App\Models\Pesanan;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class DashboardController extends Controller
 {
@@ -69,5 +71,65 @@ class DashboardController extends Controller
                 'penghasilanPerBulan'
             )
         );
+    }
+
+    public function exportPesanan(Request $request): StreamedResponse
+    {
+        $month = $request->query('month'); // expected format YYYY-MM
+
+        $query = Pesanan::with('mobil')->orderByDesc('created_at');
+
+        if ($month) {
+            [$year, $m] = explode('-', $month);
+            $query->whereYear('created_at', $year)->whereMonth('created_at', $m);
+        }
+
+        $pesanan = $query->get();
+
+        $filename = 'riwayat_pembelian_' . ($month ? $month : date('Y-m-d')) . '.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$filename}\"",
+        ];
+
+        $delimiter = ';';
+
+        $callback = function () use ($pesanan, $delimiter) {
+            $out = fopen('php://output', 'w');
+            // BOM for Excel UTF-8
+            fwrite($out, "\xEF\xBB\xBF");
+
+            // Header row
+            fputcsv($out, [
+                'ID', 'Nama Pembeli', 'Email', 'Telepon', 'Alamat', 'Mobil', 'Tahun', 'Harga', 'Jenis', 'Status', 'Created At'
+            ], $delimiter);
+
+            foreach ($pesanan as $p) {
+                $harga = $p->mobil?->harga;
+                // Ensure numeric price has no thousand separators
+                $harga = $harga !== null ? (string) (0 + $harga) : '';
+
+                $created = $p->created_at ? $p->created_at->format('Y-m-d H:i:s') : '';
+
+                fputcsv($out, [
+                    $p->id,
+                    $p->nama_pembeli,
+                    $p->email,
+                    $p->telepon,
+                    $p->alamat,
+                    $p->mobil?->nama,
+                    $p->mobil?->tahun,
+                    $harga,
+                    $p->jenis,
+                    $p->status,
+                    $created,
+                ], $delimiter);
+            }
+
+            fclose($out);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }
