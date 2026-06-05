@@ -35,12 +35,14 @@
     <tr class="scroll-scale-up">
 
         <td width="150">
+            @php
+                $gambar = $m->gambar1 ?? $m->gambar2 ?? $m->gambar3;
+            @endphp
 
-            @if($m->gambar1)
-                <img src="{{ asset('storage/'.$m->gambar1) }}"
+            @if($gambar)
+                <img src="{{ asset('storage/'.$gambar) }}"
                      width="120">
             @endif
-
         </td>
 
         <td>{{ $m->nama }}</td>
