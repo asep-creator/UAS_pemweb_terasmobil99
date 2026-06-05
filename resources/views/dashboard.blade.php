@@ -73,6 +73,12 @@
                 <h5 class="mb-1">Data Pesanan</h5>
                 <p class="text-muted mb-0">Ringkasan pesanan terbaru dan statusnya.</p>
             </div>
+            <div class="mt-3 mt-md-0">
+                <form class="d-flex" method="GET" action="{{ route('admin.riwayat.export') }}" target="_blank">
+                    <input type="month" name="month" class="form-control form-control-sm me-2" />
+                    <button type="submit" class="btn btn-sm btn-primary">Unduh Excel</button>
+                </form>
+            </div>
         </div>
 
         <div class="table-responsive">
