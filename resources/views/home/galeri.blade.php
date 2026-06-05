@@ -68,9 +68,13 @@
     
     <div class="card h-100">
 
-        @if($m->gambar1)
-        <img src="{{ asset('storage/'.$m->gambar1) }}"
-             style="height:220px;object-fit:cover">
+        @php
+            $gambar = $m->gambar1 ?? $m->gambar2 ?? $m->gambar3;
+        @endphp
+
+        @if($gambar)
+            <img src="{{ asset('storage/'.$gambar) }}"
+                 style="height:220px;object-fit:cover">
         @endif
 
         <div class="card-body">
