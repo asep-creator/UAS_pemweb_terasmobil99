@@ -23,6 +23,8 @@ Route::middleware(['auth','admin'])->group(function () {
         [DashboardController::class,'index'])
         ->name('dashboard.admin');
 
+    Route::get('/admin/riwayat-pembelian/export', [DashboardController::class, 'exportPesanan'])
+        ->name('admin.riwayat.export');
     Route::resource('mobil', MobilController::class);
 
 });

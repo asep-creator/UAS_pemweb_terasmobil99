@@ -5,7 +5,9 @@ on:
     branches:
       - master
       - '*.x'
+
   pull_request:
+
   schedule:
     - cron: '0 0 * * *'
 
@@ -25,7 +27,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -42,6 +44,17 @@ jobs:
 
       - name: Generate app key
         run: php artisan key:generate
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install NPM dependencies
+        run: npm ci
+
+      - name: Build Vite assets
+        run: npm run build
 
       - name: Execute tests
         run: php artisan test
