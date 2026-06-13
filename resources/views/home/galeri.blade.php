@@ -4,7 +4,6 @@
 
 <div class="scroll-scale-up">
 
-```
 <!-- Header -->
 <div class="mb-8">
 
