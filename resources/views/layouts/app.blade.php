@@ -72,9 +72,9 @@
         <!-- Desktop Menu (moved to right side) -->
 
         <!-- Right Side (navigation links + user controls) -->
-        <div class="hidden md:flex items-center gap-6">
+        <div class="hidden md:flex items-center gap-4">
 
-            <div class="hidden md:flex items-center gap-8">
+            <div class="hidden md:flex items-center gap-3">
 
                 <a href="{{ url('/') }}"
                    class="{{ (request()->is('/') || request()->routeIs('beranda')) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-red-500' }} font-medium transition px-3 py-2 rounded-lg">
@@ -137,11 +137,6 @@
                     </summary>
 
                     <div class="absolute right-0 mt-3 w-44 bg-white rounded-2xl shadow-lg border overflow-hidden">
-
-                        <a href="{{ route('profile.edit') }}"
-                           class="block px-4 py-3 text-gray-700 hover:bg-gray-100 no-underline">
-                            Profil
-                        </a>
 
                         <form action="{{ route('logout') }}"
                               method="POST">
