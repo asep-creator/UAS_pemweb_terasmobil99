@@ -2,147 +2,164 @@
 
 @section('content')
 
-<div class="py-4">
+<div class="max-w-6xl mx-auto px-4 py-6">
 
-    <div class="text-center mb-5 scroll-scale-up">
-        <h1 class="fw-bold display-5 text-dark">
-            Tentang Kami
-        </h1>
+```
+<!-- HERO -->
+<section class="text-center mb-10 scroll-scale-up">
 
-        <p class="lead text-secondary">
-            Selamat datang di
-            <span class="text-danger fw-semibold">
-                Teras Mobil 99
-            </span>
+    <p class="text-red-500 fw-semibold mb-2">
+        Tentang Kami
+    </p>
+
+    <h1 class="text-5xl md:text-7xl font-extrabold text-dark">
+        Showroom
+        <span class="text-danger">
+            Teras Mobil 99
+        </span>
+    </h1>
+
+    <p class="text-muted mt-4 mx-auto text-lg" style="max-width: 760px;">
+        Teras Mobil 99 adalah showroom mobil terpercaya yang menyediakan
+        berbagai pilihan kendaraan berkualitas dengan harga terbaik,
+        proses pembelian yang mudah, aman, dan pelayanan profesional
+        untuk setiap pelanggan.
+    </p>
+
+</section>
+
+<!-- STATISTIK -->
+<section class="grid md:grid-cols-3 gap-4 mb-10 scroll-scale-up">
+
+    <div class="bg-white rounded-[2rem] shadow-lg p-6 text-center">
+        <h2 class="text-danger fw-bold text-5xl">500+</h2>
+        <p class="text-muted mt-2 mb-0">Pelanggan Puas</p>
+    </div>
+
+    <div class="bg-white rounded-[2rem] shadow-lg p-6 text-center">
+        <h2 class="text-danger fw-bold text-5xl">50+</h2>
+        <p class="text-muted mt-2 mb-0">Mobil Tersedia</p>
+    </div>
+
+    <div class="bg-white rounded-[2rem] shadow-lg p-6 text-center">
+        <h2 class="text-danger fw-bold text-5xl">10+</h2>
+        <p class="text-muted mt-2 mb-0">Tahun Pengalaman</p>
+    </div>
+
+</section>
+
+<!-- FOTO -->
+<section class="mb-10 scroll-scale-up">
+
+    <img
+        src="{{ asset('src/car photo.jpg') }}"
+        alt="Showroom Teras Mobil 99"
+        class="w-full h-[220px] md:h-[320px] object-cover rounded-[2rem] shadow-xl">
+
+</section>
+
+<!-- VISI MISI LOKASI -->
+<section class="grid md:grid-cols-3 gap-4 mb-10 scroll-scale-up">
+
+    <div class="bg-white rounded-[2rem] shadow-lg p-6">
+        <div class="text-4xl mb-3">🎯</div>
+
+        <h3 class="fw-bold mb-3 text-xl">
+            Visi
+        </h3>
+
+        <p class="text-muted mb-0">
+            Menjadi showroom mobil terpercaya pilihan masyarakat Indonesia.
         </p>
     </div>
 
-    <div class="row g-4 scroll-scale-up">
+    <div class="bg-white rounded-[2rem] shadow-lg p-6">
+        <div class="text-4xl mb-3">❤️</div>
 
-        <div class="col-lg-7">
+        <h3 class="fw-bold mb-3 text-xl">
+            Misi
+        </h3>
 
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
+        <p class="text-muted mb-0">
+            Menyediakan kendaraan berkualitas, harga transparan,
+            serta pelayanan terbaik untuk setiap pelanggan.
+        </p>
+    </div>
 
-                    <h3 class="fw-bold mb-4">
-                        Profil Perusahaan
-                    </h3>
+    <div class="bg-white rounded-[2rem] shadow-lg p-6">
+        <div class="text-4xl mb-3">📍</div>
 
-                    <p class="text-muted">
-                        Teras Mobil 99 adalah showroom mobil yang menyediakan
-                        berbagai pilihan mobil bekas dan baru berkualitas
-                        dengan harga terbaik.
-                    </p>
+        <h3 class="fw-bold mb-3 text-xl">
+            Lokasi
+        </h3>
 
-                    <p class="text-muted mb-0">
-                        Kami berkomitmen memberikan pelayanan terbaik kepada
-                        pelanggan dengan proses transaksi yang aman, cepat,
-                        dan terpercaya.
-                    </p>
+        <p class="text-muted mb-0">
+            sioarjo, Jawa Timur.
+        </p>
+    </div>
 
-                </div>
-            </div>
+</section>
 
+<!-- KEUNGGULAN -->
+<section class="bg-slate-900 text-white rounded-[2.5rem] p-8 md:p-10 mb-10 scroll-scale-up">
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+        <div>
+            <p class="text-red-400 fw-semibold mb-2">
+                Kenapa Memilih Kami
+            </p>
+
+            <h2 class="text-3xl fw-bold leading-snug">
+                Pengalaman membeli mobil jadi lebih mudah dan nyaman
+            </h2>
         </div>
 
-        <div class="col-lg-5">
+        <div class="space-y-2 text-gray-200">
+            <p>✔ Mobil telah melalui pengecekan kualitas</p>
+            <p>✔ Harga transparan tanpa biaya tersembunyi</p>
+            <p>✔ Proses pembelian cepat dan aman</p>
+        </div>
 
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-body p-4">
-
-                    <h3 class="fw-bold mb-4">
-                        Keunggulan Kami
-                    </h3>
-
-                    <ul class="list-group list-group-flush">
-
-                        <li class="list-group-item">
-                            ✅ Mobil Berkualitas
-                        </li>
-
-                        <li class="list-group-item">
-                            ✅ Harga Kompetitif
-                        </li>
-
-                        <li class="list-group-item">
-                            ✅ Proses Cepat
-                        </li>
-
-                        <li class="list-group-item">
-                            ✅ Pelayanan Ramah
-                        </li>
-
-                        <li class="list-group-item">
-                            ✅ Konsultasi WhatsApp
-                        </li>
-
-                    </ul>
-
-                </div>
-            </div>
-
+        <div class="space-y-2 text-gray-200">
+            <p>✔ Banyak pilihan merek dan tipe mobil</p>
+            <p>✔ Pelayanan ramah dan profesional</p>
+            <p>✔ Konsultasi gratis sesuai kebutuhan Anda</p>
         </div>
 
     </div>
 
-    <div class="my-5"></div>
+</section>
 
-    <div class="row g-4 scroll-scale-up">
+<!-- CTA -->
+<section class="bg-red-50 rounded-[2rem] p-8 text-center shadow-sm scroll-scale-up">
 
-        <div class="col-lg-6">
+    <h2 class="text-3xl fw-bold mb-3">
+        Siap Menemukan Mobil Impian Anda?
+    </h2>
 
-            <div class="card border-0 shadow-sm">
-                <div class="card-body p-4">
+    <p class="text-muted mb-4">
+        Jelajahi berbagai pilihan mobil berkualitas yang tersedia
+        di Teras Mobil 99 dan temukan kendaraan yang sesuai dengan kebutuhan Anda.
+    </p>
 
-                    <h3 class="fw-bold mb-4">
-                        Kontak Kami
-                    </h3>
+    <div class="flex flex-wrap justify-center gap-3">
 
-                    <p class="mb-3">
-                        📍 Sidoarjo, Jawa Timur
-                    </p>
+        <a href="{{ route('galeri') }}"
+           class="btn btn-dark px-4">
+            Lihat Galeri
+        </a>
 
-                    <p class="mb-3">
-                        📞 081234567890
-                    </p>
-
-                    <p class="mb-0">
-                        ✉️ terasmobil99@gmail.com
-                    </p>
-
-                </div>
-            </div>
-
-        </div>
-
-        <div class="col-lg-6">
-
-            <div class="card border-0 shadow-sm bg-danger bg-opacity-10">
-                <div class="card-body p-4">
-
-                    <h3 class="fw-bold mb-3">
-                        Hubungi Kami
-                    </h3>
-
-                    <p class="text-muted">
-                        Tim kami siap membantu Anda dalam proses
-                        pembelian maupun konsultasi kendaraan.
-                    </p>
-
-                    <a href="https://wa.me/6281234567890"
-                       target="_blank"
-                       class="btn btn-danger px-4">
-
-                        Chat WhatsApp
-
-                    </a>
-
-                </div>
-            </div>
-
-        </div>
+        <a href="https://wa.me/6281234567890"
+           target="_blank"
+           class="btn btn-danger px-4">
+            Chat WhatsApp
+        </a>
 
     </div>
+
+</section>
+```
 
 </div>
 

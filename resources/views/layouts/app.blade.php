@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>@yield('title', 'Teras Mobil 99')</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .scroll-scale-up,
@@ -25,72 +26,209 @@
         }
     </style>
 </head>
-<body class="bg-light">
+<body class="bg-gray-100">
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <div class="container">
-        <a class="navbar-brand fw-bold d-flex align-items-center" href="{{ url('/') }}">
-            <img src="{{ asset('src/logo.png') }}" alt="Logo" style="height:44px; margin-right:10px;">
-            <span>Teras Mobil 99</span>
+<nav class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="flex justify-between items-center h-16">
+
+        <!-- Logo -->
+        <a href="{{ url('/') }}" class="flex items-center gap-3 no-underline">
+
+            <img
+                src="{{ asset('src/logo.png') }}"
+                alt="Logo"
+                class="h-11 w-auto">
+
+            <span class="text-xl font-bold text-gray-900">
+                Teras Mobil 99
+            </span>
+
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8">
+
+            <a href="{{ url('/') }}"
+               class="text-gray-700 hover:text-red-500 font-medium transition">
+                Beranda
+            </a>
+
+            <a href="{{ route('galeri') }}"
+               class="text-gray-700 hover:text-red-500 font-medium transition">
+                Galeri
+            </a>
+
+            <a href="{{ route('tentang') }}"
+               class="text-gray-700 hover:text-red-500 font-medium transition">
+                Tentang
+            </a>
+
+            @auth
+                @if(auth()->user()->role == 'admin')
+                    <a href="{{ route('dashboard.admin') }}"
+                       class="text-yellow-600 font-semibold hover:text-yellow-500">
+                        Admin
+                    </a>
+                @endif
+            @endauth
+
+        </div>
+
+        <!-- Right Side -->
+        <div class="hidden md:flex items-center gap-4">
+
+            @guest
+
+                <a href="{{ route('login') }}"
+                   class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-xl font-medium transition">
+                    Masuk
+                </a>
+
+            @else
+
+                <details class="relative">
+
+                    <summary class="list-none cursor-pointer flex items-center gap-2">
+
+                        @if(auth()->user()->role == 'admin')
+                            <span class="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full">
+                                Admin
+                            </span>
+                        @endif
+
+                        <img
+                            src="{{ auth()->user()->profile_photo_url ?? asset('src/profile.jpg') }}"
+                            alt="Avatar"
+                            class="w-9 h-9 rounded-full object-cover border">
+
+                        <span class="text-sm text-gray-700">
+                            {{ Str::limit(auth()->user()->name, 15) }}
+                        </span>
+
+                    </summary>
+
+                    <div class="absolute right-0 mt-3 w-44 bg-white rounded-2xl shadow-lg border overflow-hidden">
+
+                        <a href="{{ route('profile.edit') }}"
+                           class="block px-4 py-3 text-gray-700 hover:bg-gray-100 no-underline">
+                            Profil
+                        </a>
+
+                        <form action="{{ route('logout') }}"
+                              method="POST">
+                            @csrf
+
+                            <button
+                                type="submit"
+                                class="w-full text-left px-4 py-3 text-red-500 hover:bg-gray-100">
+                                Keluar
+                            </button>
+                        </form>
+
+                    </div>
+
+                </details>
+
+            @endguest
+
+        </div>
+
+        <!-- Mobile Button -->
+        <button
+            id="mobile-menu-button"
+            class="md:hidden text-gray-700">
+
+            ☰
+
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-lg-center">
-                <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="{{ url('/') }}">Beranda</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="{{ route('galeri') }}">Galeri</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="{{ route('tentang') }}">Tentang</a>
-                </li>
-                @auth
-                    @if(auth()->user()->role == 'admin')
-                        <li class="nav-item">
-                            <a class="nav-link text-warning" href="{{ route('dashboard.admin') }}">Admin</a>
-                        </li>
-                    @endif
-                @endauth
-                @guest
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-primary" href="{{ route('login') }}">Masuk</a>
-                    </li>
-                @else
-                    <li class="nav-item dropdown ms-lg-3">
-                        <a class="nav-link dropdown-toggle d-flex flex-row align-items-center gap-2" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 0.25rem 0;">
-                            @if(auth()->user()->role == 'admin')
-                                <span class="badge bg-warning text-dark small">Admin</span>
-                            @endif
-                            <img src="{{ auth()->user()->profile_photo_url ?? asset('src/profile.jpg') }}" alt="Avatar" class="rounded-circle" style="width:32px;height:32px;object-fit:cover;">
-                            <span class="d-none d-lg-inline small">{{ Str::limit(auth()->user()->name, 15) }}</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end text-center p-2" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Profil</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li>
-                                <form action="{{ route('logout') }}" method="POST" class="px-3">
-                                    @csrf
-                                    <button type="submit" class="btn btn-link text-danger p-0">Keluar</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                @endguest
-                <li class="nav-item ms-3 d-flex align-items-center">
-                    @yield('top-right-logo')
-                </li>
-            </ul>
-        </div>
     </div>
+
+    <!-- Mobile Menu -->
+    <div
+        id="mobile-menu"
+        class="hidden md:hidden pb-4">
+
+        <div class="flex flex-col gap-3">
+
+            <a href="{{ url('/') }}"
+               class="text-gray-700 hover:text-red-500">
+                Beranda
+            </a>
+
+            <a href="{{ route('galeri') }}"
+               class="text-gray-700 hover:text-red-500">
+                Galeri
+            </a>
+
+            <a href="{{ route('tentang') }}"
+               class="text-gray-700 hover:text-red-500">
+                Tentang
+            </a>
+
+            @auth
+                @if(auth()->user()->role == 'admin')
+                    <a href="{{ route('dashboard.admin') }}"
+                       class="text-yellow-600">
+                        Admin
+                    </a>
+                @endif
+            @endauth
+
+            @guest
+
+                <a href="{{ route('login') }}"
+                   class="bg-red-500 text-white px-4 py-2 rounded-xl text-center">
+                    Masuk
+                </a>
+
+            @else
+
+                <a href="{{ route('profile.edit') }}">
+                    Profil
+                </a>
+
+                <form action="{{ route('logout') }}"
+                      method="POST">
+                    @csrf
+
+                    <button type="submit" class="text-red-500">
+                        Keluar
+                    </button>
+                </form>
+
+            @endguest
+
+        </div>
+
+    </div>
+
+</div>
+
 </nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+
+    if(button && menu){
+        button.addEventListener('click', function () {
+            menu.classList.toggle('hidden');
+        });
+    }
+
+});
+</script>
+
 
 <main class="container mt-5">
     @if(session('success'))
-        <div class="alert alert-success">
+        <div class="bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-xl mb-4">
             {{ session('success') }}
         </div>
     @endif
@@ -98,30 +236,72 @@
     @yield('content')
 </main>
 
-<footer class="bg-dark text-light mt-5 py-5">
-    <div class="container">
-        <div class="row gy-4">
-            <div class="col-md-4">
-                <h5 class="fw-bold">Teras Mobil 99</h5>
-                <p class="mb-0 text-white">Platform jual beli mobil terpercaya dengan pilihan mobil berkualitas, harga terbaik, dan proses pembelian yang mudah.</p>
-            </div>
-            <div class="col-md-4">
-                <h5 class="fw-bold">Navigasi</h5>
-                <ul class="list-unstyled">
-                    <li><a href="{{ url('/') }}" class="text-white text-decoration-none">Beranda</a></li>
-                    <li><a href="{{ route('galeri') }}" class="text-white text-decoration-none">Galeri</a></li>
-                    <li><a href="{{ route('tentang') }}" class="text-white text-decoration-none">Tentang</a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <h5 class="fw-bold">Kontak Kami</h5>
-                <p class="mb-1 text-white">📍 Jl. Raya Mobil No.99, Surabaya</p>
-                <p class="mb-1 text-white">📞 0812-3456-7890</p>
-                <p class="mb-0 text-white">✉️ info@terasmobil99.com</p>
+<footer class="bg-slate-900 text-white mt-16">
+
+<div class="max-w-7xl mx-auto px-6 py-12">
+
+    <div class="grid md:grid-cols-3 gap-8">
+
+        <div>
+            <h3 class="text-xl font-bold mb-3">
+                Teras Mobil 99
+            </h3>
+
+            <p class="text-gray-300 leading-relaxed">
+                Platform jual beli mobil terpercaya dengan pilihan mobil berkualitas,
+                harga terbaik, dan proses pembelian yang mudah.
+            </p>
+        </div>
+
+        <div>
+            <h3 class="text-xl font-bold mb-3">
+                Navigasi
+            </h3>
+
+            <div class="flex flex-col gap-2">
+
+                <a href="{{ url('/') }}"
+                   class="text-gray-300 hover:text-white no-underline">
+                    Beranda
+                </a>
+
+                <a href="{{ route('galeri') }}"
+                   class="text-gray-300 hover:text-white no-underline">
+                    Galeri
+                </a>
+
+                <a href="{{ route('tentang') }}"
+                   class="text-gray-300 hover:text-white no-underline">
+                    Tentang
+                </a>
+
             </div>
         </div>
-        <div class="text-center text-white small mt-4">&copy; 2026 Teras Mobil 99. All Rights Reserved.</div>
+
+        <div>
+            <h3 class="text-xl font-bold mb-3">
+                Kontak Kami
+            </h3>
+
+            <div class="space-y-2 text-gray-300">
+
+                <p>📍 Jl. Raya Mobil No.99, Surabaya</p>
+                <p>📞 0812-3456-7890</p>
+                <p>✉️ info@terasmobil99.com</p>
+
+            </div>
+        </div>
+
     </div>
+
+    <div class="border-t border-gray-700 mt-8 pt-6 text-center text-sm text-gray-400">
+
+        © 2026 Teras Mobil 99. All Rights Reserved.
+
+    </div>
+
+</div>
+
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
