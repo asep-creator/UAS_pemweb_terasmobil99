@@ -25,6 +25,26 @@
             transform: scale(1);
             opacity: 1;
         }
+
+        /* Navbar open-state: soft blue frame when dropdown or mobile menu is open */
+        nav details[open] > summary {
+            background-color: #eef6ff; /* soft blue */
+            border-radius: 0.5rem;
+        }
+
+        nav details[open] > div {
+            background-color: #eef6ff; /* soft blue */
+            border: 1px solid #cfe8ff;
+            box-shadow: 0 8px 20px rgba(14,30,71,0.06);
+        }
+
+        /* Mobile menu visible state */
+        nav #mobile-menu:not(.hidden) {
+            background-color: #eef6ff; /* soft blue */
+            border: 1px solid #cfe8ff;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -49,36 +69,41 @@
 
         </a>
 
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex items-center gap-8">
+        <!-- Desktop Menu (moved to right side) -->
 
-            <a href="{{ url('/') }}"
-               class="text-gray-700 hover:text-red-500 font-medium transition">
-                Beranda
-            </a>
+        <!-- Right Side (navigation links + user controls) -->
+        <div class="hidden md:flex items-center gap-6">
 
-            <a href="{{ route('galeri') }}"
-               class="text-gray-700 hover:text-red-500 font-medium transition">
-                Galeri
-            </a>
+            <div class="hidden md:flex items-center gap-8">
 
-            <a href="{{ route('tentang') }}"
-               class="text-gray-700 hover:text-red-500 font-medium transition">
-                Tentang
-            </a>
+                <a href="{{ url('/') }}"
+                   class="{{ (request()->is('/') || request()->routeIs('beranda')) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-red-500' }} font-medium transition px-3 py-2 rounded-lg">
+                    Beranda
+                </a>
 
-            @auth
-                @if(auth()->user()->role == 'admin')
-                    <a href="{{ route('dashboard.admin') }}"
-                       class="text-yellow-600 font-semibold hover:text-yellow-500">
-                        Admin
-                    </a>
-                @endif
-            @endauth
+                <a href="{{ route('galeri') }}"
+                   class="{{ request()->routeIs('galeri') ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-red-500' }} font-medium transition px-3 py-2 rounded-lg">
+                    Galeri
+                </a>
 
-        </div>
+                <a href="{{ route('tentang') }}"
+                   class="{{ request()->routeIs('tentang') ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-red-500' }} font-medium transition px-3 py-2 rounded-lg">
+                    Tentang
+                </a>
+
+                @auth
+                    @if(auth()->user()->role == 'admin')
+                        <a href="{{ route('dashboard.admin') }}"
+                           class="{{ request()->routeIs('dashboard.admin') ? 'bg-blue-50 text-blue-700' : 'text-yellow-600' }} font-semibold hover:text-yellow-500 px-3 py-2 rounded-lg transition">
+                            Dashboard
+                        </a>
+                    @endif
+                @endauth
+
+            </div>
 
         <!-- Right Side -->
+        
         <div class="hidden md:flex items-center gap-4">
 
             @guest
@@ -156,25 +181,25 @@
         <div class="flex flex-col gap-3">
 
             <a href="{{ url('/') }}"
-               class="text-gray-700 hover:text-red-500">
+               class="{{ (request()->is('/') || request()->routeIs('beranda')) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-red-500' }} block px-4 py-2 rounded-lg transition">
                 Beranda
             </a>
 
             <a href="{{ route('galeri') }}"
-               class="text-gray-700 hover:text-red-500">
+               class="{{ request()->routeIs('galeri') ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-red-500' }} block px-4 py-2 rounded-lg transition">
                 Galeri
             </a>
 
             <a href="{{ route('tentang') }}"
-               class="text-gray-700 hover:text-red-500">
+               class="{{ request()->routeIs('tentang') ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:text-red-500' }} block px-4 py-2 rounded-lg transition">
                 Tentang
             </a>
 
             @auth
                 @if(auth()->user()->role == 'admin')
                     <a href="{{ route('dashboard.admin') }}"
-                       class="text-yellow-600">
-                        Admin
+                       class="{{ request()->routeIs('dashboard.admin') ? 'bg-blue-50 text-blue-700' : 'text-yellow-600' }} block px-4 py-2 rounded-lg transition">
+                        Dashboard
                     </a>
                 @endif
             @endauth
