@@ -36,61 +36,61 @@
                     <input type="hidden" name="mobil_id" value="{{ $mobil->id }}">
 
                     <div class="mb-3">
-                        <label class="form-label">Nama Lengkap</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
                         <input type="text" name="nama_pembeli" value="{{ old('nama_pembeli') }}" required class="w-full p-3 border rounded-lg">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">No WhatsApp</label>
-                        <div class="input-group">
-                            <span class="input-group-text">+62</span>
-                            <input type="text" name="telepon" value="{{ old('telepon') }}" required class="form-control">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">No WhatsApp</label>
+                        <div class="flex items-center">
+                            <span class="px-3 py-2 border border-r-0 rounded-l-lg bg-gray-100 text-sm">+62</span>
+                            <input type="text" name="telepon" value="{{ old('telepon') }}" required class="flex-1 p-3 border rounded-r-lg">
                         </div>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Alamat</label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Alamat</label>
                         <textarea name="alamat" rows="3" class="w-full p-3 border rounded-lg">{{ old('alamat') }}</textarea>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email" readonly required class="w-full p-3 border rounded-lg bg-light" value="{{ old('email', auth()->user()->email) }}">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" name="email" readonly required class="w-full p-3 border rounded-lg bg-gray-100" value="{{ old('email', auth()->user()->email) }}">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Mobil</label>
-                        <input type="text" readonly class="w-full p-3 border rounded-lg bg-light" value="{{ $mobil->nama }}">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Mobil</label>
+                        <input type="text" readonly class="w-full p-3 border rounded-lg bg-gray-100" value="{{ $mobil->nama }}">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Tipe</label>
-                        <input type="text" readonly class="w-full p-3 border rounded-lg bg-light" value="{{ $mobil->tipe ?? $mobil->merk }}">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tipe</label>
+                        <input type="text" readonly class="w-full p-3 border rounded-lg bg-gray-100" value="{{ $mobil->tipe ?? $mobil->merk }}">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Tahun</label>
-                        <input type="text" readonly class="w-full p-3 border rounded-lg bg-light" value="{{ $mobil->tahun }}">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Tahun</label>
+                        <input type="text" readonly class="w-full p-3 border rounded-lg bg-gray-100" value="{{ $mobil->tahun }}">
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Jenis Pembelian</label>
-                        <div class="d-flex gap-3 align-items-center mt-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="jenis" id="cashRadio" value="cash" checked>
-                                <label class="form-check-label" for="cashRadio">Cash</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="jenis" id="kreditRadio" value="kredit">
-                                <label class="form-check-label" for="kreditRadio">Kredit</label>
-                            </div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Jenis Pembelian</label>
+                        <div class="flex gap-3 items-center mt-2">
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="jenis" id="cashRadio" value="cash" checked class="h-4 w-4">
+                                <span class="text-sm">Cash</span>
+                            </label>
+                            <label class="flex items-center gap-2">
+                                <input type="radio" name="jenis" id="kreditRadio" value="kredit" class="h-4 w-4">
+                                <span class="text-sm">Kredit</span>
+                            </label>
                         </div>
-                        <div id="creditNote" class="mt-2 text-danger small" style="display:none;">
+                        <div id="creditNote" class="mt-2 text-red-600 text-sm" style="display:none;">
                             *Wajib menyerahkan KTP & KK saat pengambilan
                         </div>
                     </div>
 
-                    <div class="mt-4 d-flex flex-column flex-sm-row gap-3">
+                    <div class="mt-4 flex flex-col sm:flex-row gap-3">
                         <a href="{{ route('detail', $mobil->id) }}" class="text-center w-full sm:w-auto px-5 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition">
                             Batal
                         </a>
