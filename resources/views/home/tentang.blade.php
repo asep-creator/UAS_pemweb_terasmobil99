@@ -93,7 +93,7 @@
         </h3>
 
         <p class="text-gray-500 mb-0">
-            sioarjo, Jawa Timur.
+            sidoarjo, Jawa Timur.
         </p>
     </div>
 

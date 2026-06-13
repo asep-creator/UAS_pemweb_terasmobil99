@@ -5,6 +5,8 @@
     <title>@yield('title', 'Teras Mobil 99')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
+        /* Hide elements marked with x-cloak until Alpine initializes */
+        [x-cloak] { display: none !important; }
         .scroll-scale-up,
         .animate-card,
         .animate-carousel,

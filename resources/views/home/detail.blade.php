@@ -6,202 +6,162 @@
 
 <div class="max-w-7xl mx-auto scroll-scale-up">
 
+    <!-- Back -->
+    <a
+        href="{{ route('galeri') }}"
+        class="inline-flex items-center gap-2 text-red-500 hover:text-red-600 font-medium no-underline mb-6">
 
-<!-- Back -->
-<a
-    href="{{ route('galeri') }}"
-    class="inline-flex items-center gap-2 text-red-500 hover:text-red-600 font-medium no-underline mb-6">
+        ← Kembali ke Galeri
 
-    ← Kembali ke Galeri
+    </a>
 
-</a>
+    <!-- Container -->
+    <div class="bg-white rounded-[2.5rem] shadow-xl overflow-hidden">
 
-<!-- Container -->
-<div class="bg-white rounded-[2.5rem] shadow-xl overflow-hidden">
+        <div class="grid lg:grid-cols-[1.2fr_0.8fr] gap-6 p-6 lg:p-8">
 
-    <div class="grid lg:grid-cols-2 gap-8 p-6 lg:p-10">
+            <!-- FOTO -->
+            <div x-data="{ active: 1, max: {{ $mobil->gambar3 ? 3 : ($mobil->gambar2 ? 2 : 1) }}, timer: null }"
+                 x-init="timer = setInterval(() => active = active < max ? active + 1 : 1, 5000)">
 
-        <!-- FOTO -->
-        <div>
+                <!-- Foto Utama -->
+                <div class="overflow-hidden rounded-[2rem] shadow-lg relative">
 
-            <div
-                id="carouselMobil"
-                class="carousel slide"
-                data-bs-ride="carousel">
-
-                <div class="carousel-inner rounded-[2rem] overflow-hidden">
-
-                    @php $active = true; @endphp
-
-                    @if($mobil->gambar1)
-
-                        <div class="carousel-item {{ $active ? 'active' : '' }}">
-
-                            <img
-                                src="{{ asset('storage/'.$mobil->gambar1) }}"
-                                class="w-full h-[500px] object-cover">
-
-                        </div>
-
-                        @php $active = false; @endphp
-
-                    @endif
+                    <img
+                        x-cloak
+                        x-show="active === 1"
+                        src="{{ asset('storage/'.$mobil->gambar1) }}"
+                        class="w-full aspect-[16/9] object-cover">
 
                     @if($mobil->gambar2)
-
-                        <div class="carousel-item {{ $active ? 'active' : '' }}">
-
-                            <img
-                                src="{{ asset('storage/'.$mobil->gambar2) }}"
-                                class="w-full h-[500px] object-cover">
-
-                        </div>
-
-                        @php $active = false; @endphp
-
+                    <img
+                        x-cloak
+                        x-show="active === 2"
+                        src="{{ asset('storage/'.$mobil->gambar2) }}"
+                        class="w-full aspect-[16/9] object-cover">
                     @endif
 
                     @if($mobil->gambar3)
+                    <img
+                        x-cloak
+                        x-show="active === 3"
+                        src="{{ asset('storage/'.$mobil->gambar3) }}"
+                        class="w-full aspect-[16/9] object-cover">
+                    @endif
 
-                        <div class="carousel-item {{ $active ? 'active' : '' }}">
+                    <!-- Navigation buttons -->
+                    <button
+                        type="button"
+                        @click="active = active > 1 ? active - 1 : max"
+                        class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow z-10 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
 
-                            <img
-                                src="{{ asset('storage/'.$mobil->gambar3) }}"
-                                class="w-full h-[500px] object-cover">
+                    <button
+                        type="button"
+                        @click="active = active < max ? active + 1 : 1"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow z-10 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
 
-                        </div>
+                </div>
 
+                <!-- Thumbnail -->
+                <div class="flex justify-center gap-4 mt-5">
+
+                    <img
+                        src="{{ asset('storage/'.$mobil->gambar1) }}"
+                        @click="active = 1"
+                        :class="active === 1
+                            ? 'border-red-500 ring-2 ring-red-200'
+                            : 'border-gray-200'"
+                        class="w-28 h-20 rounded-2xl object-cover border-2 cursor-pointer transition">
+
+                    @if($mobil->gambar2)
+                    <img
+                        src="{{ asset('storage/'.$mobil->gambar2) }}"
+                        @click="active = 2"
+                        :class="active === 2
+                            ? 'border-red-500 ring-2 ring-red-200'
+                            : 'border-gray-200'"
+                        class="w-28 h-20 rounded-2xl object-cover border-2 cursor-pointer transition">
+                    @endif
+
+                    @if($mobil->gambar3)
+                    <img
+                        src="{{ asset('storage/'.$mobil->gambar3) }}"
+                        @click="active = 3"
+                        :class="active === 3
+                            ? 'border-red-500 ring-2 ring-red-200'
+                            : 'border-gray-200'"
+                        class="w-28 h-20 rounded-2xl object-cover border-2 cursor-pointer transition">
                     @endif
 
                 </div>
 
-                <button
-                    class="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#carouselMobil"
-                    data-bs-slide="prev">
-
-                    <span class="carousel-control-prev-icon"></span>
-
-                </button>
-
-                <button
-                    class="carousel-control-next"
-                    type="button"
-                    data-bs-target="#carouselMobil"
-                    data-bs-slide="next">
-
-                    <span class="carousel-control-next-icon"></span>
-
-                </button>
-
             </div>
 
-            <!-- Thumbnail -->
-            <div class="flex justify-center gap-3 mt-4 flex-wrap">
+            <!-- DETAIL -->
+            <div class="space-y-6">
 
-                @if($mobil->gambar1)
-                    <img
-                        src="{{ asset('storage/'.$mobil->gambar1) }}"
-                        class="w-24 h-16 rounded-xl object-cover border cursor-pointer hover:opacity-80 transition"
-                        data-bs-target="#carouselMobil"
-                        data-bs-slide-to="0">
-                @endif
+                <!-- Nama & Info -->
+                <div>
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">{{ $mobil->nama }}</h1>
+                    <p class="text-base md:text-lg text-gray-600 mt-2">
+                        <span class="font-medium text-gray-700">{{ $mobil->merk }}</span>
+                        <span class="mx-2">•</span>
+                        <span class="italic text-gray-700">{{ $mobil->tipe }}</span>
+                        @if($mobil->tahun)
+                        <span class="mx-2">•</span>
+                        <span class="text-gray-500">{{ $mobil->tahun }}</span>
+                        @endif
+                    </p>
+                </div>
 
-                @if($mobil->gambar2)
-                    <img
-                        src="{{ asset('storage/'.$mobil->gambar2) }}"
-                        class="w-24 h-16 rounded-xl object-cover border cursor-pointer hover:opacity-80 transition"
-                        data-bs-target="#carouselMobil"
-                        data-bs-slide-to="1">
-                @endif
+                <!-- Harga -->
+                <div class="mb-6">
 
-                @if($mobil->gambar3)
-                    <img
-                        src="{{ asset('storage/'.$mobil->gambar3) }}"
-                        class="w-24 h-16 rounded-xl object-cover border cursor-pointer hover:opacity-80 transition"
-                        data-bs-target="#carouselMobil"
-                        data-bs-slide-to="2">
-                @endif
+                    <p class="text-sm uppercase tracking-widest text-gray-500 mb-2">
+                        Harga
+                    </p>
 
-            </div>
+                    <h2 class="text-4xl lg:text-5xl font-extrabold text-red-600">
+                        Rp {{ number_format($mobil->harga,0,',','.') }}
+                    </h2>
 
-        </div>
+                </div>
 
-        <!-- DETAIL -->
-        <div class="flex flex-col justify-center">
+                <!-- Deskripsi -->
+                <div class="bg-gray-50 border border-gray-100 rounded-[1.8rem] p-6 mb-6">
 
-            <h1 class="text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4">
+                    <h3 class="font-bold text-lg mb-3">
+                        Deskripsi Mobil
+                    </h3>
 
-                {{ $mobil->nama }}
+                    <p class="text-gray-600 leading-relaxed">
+                        {{ $mobil->deskripsi ?: 'Belum ada deskripsi untuk kendaraan ini.' }}
+                    </p>
 
-            </h1>
+                </div>
 
-            <!-- Badge -->
-            <div class="flex flex-wrap gap-2 mb-5">
+                <!-- CTA -->
+                <a
+                    href="{{ route('pesanan.create',$mobil->id) }}"
+                    class="inline-block bg-green-500 hover:bg-green-600 text-white text-center px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-base md:text-lg no-underline transition">
 
-                <span class="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm">
-                    {{ $mobil->merk }}
-                </span>
+                    Pesan Sekarang
 
-                <span class="bg-red-100 text-red-600 px-4 py-2 rounded-full text-sm">
-                    Tahun {{ $mobil->tahun ?? '-' }}
-                </span>
-
-                @if($mobil->tipe)
-
-                    <span class="bg-blue-100 text-blue-600 px-4 py-2 rounded-full text-sm">
-                        {{ $mobil->tipe }}
-                    </span>
-
-                @endif
+                </a>
 
             </div>
-
-            <!-- Harga -->
-            <div class="mb-6">
-
-                <p class="text-sm uppercase tracking-wide text-gray-500 mb-1">
-                    Harga
-                </p>
-
-                <h2 class="text-4xl font-extrabold text-red-600">
-
-                    Rp {{ number_format($mobil->harga,0,',','.') }}
-
-                </h2>
-
-            </div>
-
-            <!-- Deskripsi -->
-            <div class="bg-gray-50 rounded-[1.5rem] p-5 mb-6">
-
-                <h3 class="font-bold text-lg mb-3">
-                    Deskripsi Mobil
-                </h3>
-
-                <p class="text-gray-600 leading-relaxed">
-
-                    {{ $mobil->deskripsi ?: 'Belum ada deskripsi untuk kendaraan ini.' }}
-
-                </p>
-
-            </div>
-
-            <!-- CTA -->
-            <a
-                href="{{ route('pesanan.create',$mobil->id) }}"
-                class="inline-block bg-green-500 hover:bg-green-600 text-white text-center px-8 py-4 rounded-full font-semibold text-lg no-underline transition">
-
-                Pesan Sekarang
-
-            </a>
 
         </div>
 
     </div>
-
-</div>
 
 </div>
 
