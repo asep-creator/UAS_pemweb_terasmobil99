@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -23,13 +24,19 @@ class AuthenticatedSessionController extends Controller
      * Handle an incoming authentication request.
      */
     public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+{
+    $request->authenticate();
 
-        $request->session()->regenerate();
+    $request->session()->regenerate();
 
-        return redirect()->intended(route('beranda', absolute: false));
+    if ($request->remember) {
+        Cookie::queue('remember_email', $request->email, 43200);
+    } else {
+        Cookie::queue(Cookie::forget('remember_email'));
     }
+
+    return redirect()->intended(route('beranda', absolute: false));
+}
 
     /**
      * Destroy an authenticated session.

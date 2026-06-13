@@ -49,7 +49,7 @@
                 <input
                     type="email"
                     name="email"
-                    value="{{ old('email') }}"
+                    value="{{ old('email', Cookie::get('remember_email')) }}"
                     placeholder="Email"
                     required
                     autofocus
@@ -73,6 +73,8 @@
                     <input
                         id="remember_me"
                         type="checkbox"
+                        value="1"
+                        {{ old('remember') ? 'checked' : '' }}
                         name="remember"
                         class="mr-2">
 
