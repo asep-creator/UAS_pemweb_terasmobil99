@@ -54,6 +54,11 @@
                     </div>
 
                     <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" readonly required class="w-full p-3 border rounded-lg bg-light" value="{{ old('email', auth()->user()->email) }}">
+                    </div>
+
+                    <div class="mb-3">
                         <label class="form-label">Mobil</label>
                         <input type="text" readonly class="w-full p-3 border rounded-lg bg-light" value="{{ $mobil->nama }}">
                     </div>
