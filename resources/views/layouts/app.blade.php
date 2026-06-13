@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'Teras Mobil 99')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .scroll-scale-up,
-        .card,
-        .carousel-item,
-        .table {
+        .animate-card,
+        .animate-carousel,
+        .animate-table {
             transform: scale(0.96);
             opacity: 0;
             transition: transform 0.55s ease, opacity 0.55s ease;
@@ -18,9 +17,9 @@
         }
 
         .scroll-scale-up.visible,
-        .card.visible,
-        .carousel-item.visible,
-        .table.visible {
+        .animate-card.visible,
+        .animate-carousel.visible,
+        .animate-table.visible {
             transform: scale(1);
             opacity: 1;
         }
@@ -226,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<main class="container mt-5">
+<main class="max-w-7xl mx-auto px-4 mt-12">
     @if(session('success'))
         <div class="bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-xl mb-4">
             {{ session('success') }}
@@ -304,10 +303,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const elements = document.querySelectorAll('.scroll-scale-up, .card, .carousel-item, .table');
+        const elements = document.querySelectorAll('.scroll-scale-up, .animate-card, .animate-carousel, .animate-table');
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries, self) => {
                 entries.forEach(entry => {
