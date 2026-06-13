@@ -18,7 +18,7 @@ class PesananController extends Controller
         $request->validate([
             'mobil_id' => 'required',
             'nama_pembeli' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'telepon' => 'required',
             'alamat' => 'required',
             'jenis' => 'required|in:cash,kredit',
@@ -27,7 +27,7 @@ class PesananController extends Controller
         Pesanan::create([
             'mobil_id' => $request->mobil_id,
             'nama_pembeli' => $request->nama_pembeli,
-            'email' => $request->email,
+            'email' => auth()->user()->email,
             'telepon' => $request->telepon,
             'alamat' => $request->alamat,
             'jenis' => $request->jenis,
