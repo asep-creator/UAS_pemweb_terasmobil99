@@ -2,120 +2,188 @@
 
 @section('content')
 
-<h2 class="scroll-scale-up mb-4">Galeri Mobil</h2>
+<div class="scroll-scale-up">
 
-<div class="row">
-<div class="row mb-4 align-items-center">
+```
+<!-- Header -->
+<div class="mb-8">
 
-    <div class="col-md-6">
+    <h1 class="text-4xl font-bold mb-2">
+        Galeri Mobil
+    </h1>
 
-        <form method="GET">
-
-            <div class="input-group">
-
-                <input
-                    type="text"
-                    name="search"
-                    class="form-control"
-                    placeholder="Cari mobil..."
-                    value="{{ request('search') }}">
-                
-                    <select name="tahun" class="form-select">
-
-                    <option value="">
-                     Semua Tahun
-                    </option>
-
-                    @for($i = date('Y'); $i >= 2000; $i--)
-
-                        <option
-                            value="{{ $i }}"
-                            {{ request('tahun') == $i ? 'selected' : '' }}>
-                            {{ $i }}
-                        </option>
-
-                    @endfor
-
-                </select>
-                <button class="btn btn-primary">
-                    Cari
-                </button>
-
-            </div>
-
-        </form>
-
-    </div>
-
-    @auth
-        @if(auth()->user()->role === 'admin')
-            <div class="col-md-6 text-md-end mt-3 mt-md-0 d-flex justify-content-end gap-2">
-                <a href="{{ route('mobil.index') }}" class="btn btn-outline-secondary px-4">
-                    Data Mobil
-                </a>
-                <a href="{{ route('mobil.create') }}" class="btn btn-success px-4">
-                    + BARU
-                </a>
-            </div>
-        @endif
-    @endauth
+    <p class="text-gray-500">
+        Temukan mobil impian Anda dengan mudah.
+    </p>
 
 </div>
 
-@foreach($mobil as $m)
+<!-- Filter -->
+<div class="bg-white rounded-[2rem] shadow-sm p-5 mb-8">
 
-<div class="col-md-4 mb-4 scroll-scale-up">
-    
-    <div class="card h-100">
+    <form method="GET">
+
+        <div class="grid md:grid-cols-4 gap-3">
+
+            <input
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Cari mobil..."
+                class="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500">
+
+            <select
+                name="tahun"
+                class="px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500">
+
+                <option value="">
+                    Semua Tahun
+                </option>
+
+                @for($i = date('Y'); $i >= 2000; $i--)
+                    <option
+                        value="{{ $i }}"
+                        {{ request('tahun') == $i ? 'selected' : '' }}>
+                        {{ $i }}
+                    </option>
+                @endfor
+
+            </select>
+
+            <button
+                type="submit"
+                class="bg-red-500 hover:bg-red-600 text-white rounded-xl px-4 py-3 font-medium">
+
+                Cari
+
+            </button>
+
+            @auth
+                @if(auth()->user()->role === 'admin')
+
+                    <div class="flex gap-2">
+
+                        <a
+                            href="{{ route('mobil.index') }}"
+                            class="bg-gray-700 hover:bg-gray-800 text-white px-4 py-3 rounded-xl no-underline text-center">
+
+                            Data Mobil
+
+                        </a>
+
+                        <a
+                            href="{{ route('mobil.create') }}"
+                            class="bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-xl no-underline text-center">
+
+                            + Baru
+
+                        </a>
+
+                    </div>
+
+                @endif
+            @endauth
+
+        </div>
+
+    </form>
+
+</div>
+
+<!-- Card Mobil -->
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+    @foreach($mobil as $m)
+
+    <div class="bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition duration-300">
 
         @if($m->gambar1)
-        <img src="{{ asset('storage/'.$m->gambar1) }}"
-             style="height:220px;object-fit:cover">
+
+            <img
+                src="{{ asset('storage/'.$m->gambar1) }}"
+                alt="{{ $m->nama }}"
+                class="w-full h-56 object-cover">
+
         @endif
 
-        <div class="card-body">
+        <div class="p-5">
 
-            <h5>{{ $m->nama }}</h5>
+            <h3 class="text-xl font-bold mb-1">
+                {{ $m->nama }}
+            </h3>
 
-            <p>{{ $m->merk }}</p>
+            <p class="text-gray-500 mb-3">
+                {{ $m->merk }}
+            </p>
 
-            <h4>
+            <p class="text-2xl font-bold text-red-500 mb-4">
                 Rp {{ number_format($m->harga,0,',','.') }}
-            </h4>
+            </p>
 
-            <div class="d-flex justify-content-between align-items-center mt-3">
-                <a href="{{ route('detail',$m->id) }}" class="btn btn-primary btn-sm">
+            <div class="flex justify-between items-center">
+
+                <a
+                    href="{{ route('detail',$m->id) }}"
+                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl no-underline">
+
                     Detail
+
                 </a>
 
                 @auth
                     @if(auth()->user()->role === 'admin')
-                        <div class="d-flex gap-2">
-                            <a href="{{ route('mobil.edit', $m->id) }}" class="btn btn-dark btn-sm px-3">
+
+                        <div class="flex gap-2">
+
+                            <a
+                                href="{{ route('mobil.edit',$m->id) }}"
+                                class="bg-gray-800 text-white px-3 py-2 rounded-xl no-underline">
+
                                 Edit
+
                             </a>
-                            <form action="{{ route('mobil.destroy', $m->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus mobil ini?');">
+
+                            <form
+                                action="{{ route('mobil.destroy',$m->id) }}"
+                                method="POST"
+                                onsubmit="return confirm('Yakin ingin menghapus mobil ini?');">
+
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm px-3">
+
+                                <button
+                                    type="submit"
+                                    class="bg-red-600 text-white px-3 py-2 rounded-xl">
+
                                     Hapus
+
                                 </button>
+
                             </form>
+
                         </div>
+
                     @endif
                 @endauth
+
             </div>
 
         </div>
 
     </div>
 
-</div>
-
-@endforeach
+    @endforeach
 
 </div>
-<div class="mt-4">
+
+<!-- Pagination -->
+<div class="mt-8">
+
     {{ $mobil->links() }}
+
 </div>
+
+
+</div>
+
 @endsection

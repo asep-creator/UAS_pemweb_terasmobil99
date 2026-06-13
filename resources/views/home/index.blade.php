@@ -4,61 +4,134 @@
 
 @section('content')
 
-<section class="scroll-scale-up hero-section py-5" style="background-image: url('{{ asset('src/mobil1.jpg') }}'); background-size: cover; background-position: center; min-height:460px;">
-    <div style="background: rgba(0,0,0,0.45); min-height:460px;">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-6 text-white">
-                    <h1 class="display-5 fw-bold mb-3">Jual Beli Mobil Bekas Terpercaya</h1>
-                    <p class="lead text-white-50 mb-4">Temukan mobil impian Anda dengan harga terbaik, proses cepat, dan layanan profesional dari Teras Mobil 99.</p>
-                    <a href="{{ route('galeri') }}" class="btn btn-danger btn-lg">Lihat Mobil</a>
-                </div>
-            </div>
-        </div>
+<!-- HERO -->
+
+<section class="relative min-h-[550px] rounded-[2rem] overflow-hidden scroll-scale-up">
+
+<img
+    src="{{ asset('src/mobil1.jpg') }}"
+    alt="Mobil"
+    class="absolute inset-0 w-full h-full object-cover">
+
+<div class="absolute inset-0 bg-black/50"></div>
+
+<div class="relative h-full flex items-end md:items-center">
+
+    <div class="px-8 md:px-16 text-white pb-16 md:pb-0">
+
+        <h1 class="text-4xl md:text-6xl font-bold leading-tight">
+
+            JUAL BELI <br>
+
+            <span class="text-red-500">
+                MOBIL BEKAS
+            </span>
+
+            <br>
+
+            TERPERCAYA
+
+        </h1>
+
+        <p class="mt-4 max-w-lg text-lg text-gray-200">
+            Temukan mobil impian Anda dengan harga terbaik,
+            proses cepat, dan layanan profesional dari
+            Teras Mobil 99.
+        </p>
+
+        <a
+            href="{{ route('galeri') }}"
+            class="inline-block mt-6 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-full no-underline font-semibold transition">
+
+            Lihat Mobil →
+
+        </a>
+
     </div>
+
+</div>
+
+
 </section>
 
-<section class="scroll-scale-up py-5">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Kenapa Memilih Teras Mobil 99?</h2>
-            <p class="text-muted">Solusi terbaik untuk beli mobil bekas dengan jaminan kualitas, harga transparan, dan proses mudah.</p>
-        </div>
+<!-- KEUNGGULAN -->
 
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body">
-                        <h5 class="fw-bold">Mobil Berkualitas</h5>
-                        <p class="text-muted">Semua mobil telah dicek secara detail untuk memastikan performa dan kenyamanan.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body">
-                        <h5 class="fw-bold">Harga Terbaik</h5>
-                        <p class="text-muted">Harga bersaing dengan transparansi penuh, tanpa biaya tersembunyi.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm rounded-4 h-100">
-                    <div class="card-body">
-                        <h5 class="fw-bold">Proses Mudah</h5>
-                        <p class="text-muted">Beli mobil jadi lebih mudah! Proses cepat, praktis, dan bisa dilakukan dari mana saja.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="py-12 scroll-scale-up">
+
+
+<div class="text-center mb-10">
+
+    <h2 class="text-4xl font-bold">
+        Kenapa Memilih Teras Mobil 99?
+    </h2>
+
+    <p class="text-gray-500 mt-3">
+        Solusi terbaik untuk membeli mobil bekas berkualitas.
+    </p>
+
+</div>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+    <div class="bg-red-50 rounded-[2rem] p-6 shadow-sm">
+
+        <h3 class="font-bold text-xl mb-3">
+            Mobil Berkualitas
+        </h3>
+
+        <p class="text-gray-600">
+            Semua mobil telah dicek secara detail untuk memastikan performa dan kenyamanan.
+        </p>
+
     </div>
+
+    <div class="bg-red-50 rounded-[2rem] p-6 shadow-sm">
+
+        <h3 class="font-bold text-xl mb-3">
+            Harga Terbaik
+        </h3>
+
+        <p class="text-gray-600">
+            Harga bersaing dengan transparansi penuh tanpa biaya tersembunyi.
+        </p>
+
+    </div>
+
+    <div class="bg-red-50 rounded-[2rem] p-6 shadow-sm">
+
+        <h3 class="font-bold text-xl mb-3">
+            Proses Mudah
+        </h3>
+
+        <p class="text-gray-600">
+            Pembelian cepat, praktis, dan dapat dilakukan dengan mudah.
+        </p>
+
+    </div>
+
+</div>
+
+
 </section>
 
-<section class="scroll-scale-up py-5 bg-white rounded-4 shadow-sm">
-    <div class="container text-center">
-        <h2 class="fw-bold mb-3">Tentang Kami</h2>
-        <p class="text-muted mb-0">Teras Mobil 99 adalah showroom mobil terpercaya yang menghadirkan pilihan mobil bekas berkualitas dengan layanan terbaik untuk pelanggan.</p>
-    </div>
+<!-- TENTANG -->
+
+<section class="bg-white rounded-[2rem] p-10 text-center shadow-sm scroll-scale-up">
+
+<h2 class="text-4xl font-bold mb-5">
+    Tentang Kami
+</h2>
+
+<p class="max-w-3xl mx-auto text-gray-600 leading-relaxed">
+
+    Teras Mobil 99 hadir sebagai solusi terpercaya untuk Anda yang
+    mencari mobil bekas berkualitas. Dengan pilihan mobil yang beragam,
+    harga transparan, serta proses pembelian yang mudah, kami siap
+    membantu Anda mendapatkan kendaraan terbaik sesuai kebutuhan.
+
+</p>
+
+
 </section>
 
 @endsection
