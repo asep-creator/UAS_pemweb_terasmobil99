@@ -117,6 +117,7 @@
                                         @csrf
                                         @method('PATCH')
                                         <input type="hidden" name="status" value="Selesai">
+                                        <input type="hidden" name="current_status" value="{{ $p->status }}">
                                         <button type="submit" class="text-green-600 border border-green-600 hover:bg-green-50 px-2 py-1 rounded text-sm">✓</button>
                                     </form>
                                 @else

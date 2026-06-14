@@ -150,13 +150,20 @@
 
                 <!-- CTA -->
                 @if(auth()->user()?->role !== 'admin')
-                <a
-                    href="{{ route('pesanan.create',$mobil->id) }}"
-                    class="inline-block bg-green-500 hover:bg-green-600 text-white text-center px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-base md:text-lg no-underline transition">
+                    @if($mobil->is_order_available)
+                        <a
+                            href="{{ route('pesanan.create',$mobil->id) }}"
+                            class="inline-block bg-green-500 hover:bg-green-600 text-white text-center px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-base md:text-lg no-underline transition">
 
-                    Pesan Sekarang
+                            Pesan Sekarang
 
-                </a>
+                        </a>
+                    @else
+                        <div class="inline-flex items-center px-4 py-3 rounded-full text-sm font-semibold 
+                            {{ $mobil->order_state === 'sold' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800' }}">
+                            {{ $mobil->order_state_label }}
+                        </div>
+                    @endif
                 @endif
 
             </div>

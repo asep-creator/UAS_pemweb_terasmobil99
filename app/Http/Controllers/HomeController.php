@@ -9,7 +9,10 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $mobil = Mobil::latest()
+        $mobil = Mobil::withCount([
+            'activePesanan',
+            'finishedPesanan',
+        ])->latest()
             ->take(6)
             ->get();
 
@@ -50,6 +53,10 @@ class HomeController extends Controller
         }
 
         $mobil = $query
+            ->withCount([
+                'activePesanan',
+                'finishedPesanan',
+            ])
             ->latest()
             ->paginate(6);
 
@@ -63,6 +70,11 @@ class HomeController extends Controller
 
     public function detail(Mobil $mobil)
     {
+        $mobil->loadCount([
+            'activePesanan',
+            'finishedPesanan',
+        ]);
+
         return view(
             'home.detail',
             compact('mobil')
