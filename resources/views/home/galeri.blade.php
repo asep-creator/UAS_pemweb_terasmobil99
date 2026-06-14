@@ -120,53 +120,49 @@
                 Rp {{ number_format($m->harga,0,',','.') }}
             </p>
 
-            <div class="flex justify-between items-center">
+            @if($m->order_state_label)
+                <div class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold mb-4 
+                    {{ $m->order_state === 'sold' ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800' }}">
+                    {{ $m->order_state_label }}
+                </div>
+            @endif
 
+            <div class="flex flex-wrap items-center gap-2 mb-2">
                 <a
-                    href="{{ route('detail',$m->id) }}"
-                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl no-underline">
-
+                    href="{{ route('detail', $m->id) }}"
+                    class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl no-underline text-sm">
                     Detail
-
                 </a>
-
                 @auth
                     @if(auth()->user()->role === 'admin')
-
-                        <div class="flex gap-2">
-
-                            <a
-                                href="{{ route('mobil.edit',$m->id) }}"
-                                class="bg-gray-800 text-white px-3 py-2 rounded-xl no-underline">
-
-                                Edit
-
-                            </a>
-
-                            <form
-                                action="{{ route('mobil.destroy',$m->id) }}"
-                                method="POST"
-                                onsubmit="return confirm('Yakin ingin menghapus mobil ini?');">
-
-                                @csrf
-                                @method('DELETE')
-
-                                <button
-                                    type="submit"
-                                    class="bg-red-600 text-white px-3 py-2 rounded-xl">
-
-                                    Hapus
-
-                                </button>
-
-                            </form>
-
-                        </div>
-
+                        <a
+                            href="{{ route('mobil.edit',$m->id) }}"
+                            class="bg-gray-800 text-white px-4 py-2 rounded-xl no-underline text-sm">
+                            Edit
+                        </a>
                     @endif
                 @endauth
-
             </div>
+
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <form
+                        action="{{ route('mobil.destroy',$m->id) }}"
+                        method="POST"
+                        onsubmit="return confirm('Yakin ingin menghapus mobil ini?');">
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button
+                            type="submit"
+                            class="bg-red-600 text-white px-3 py-2 rounded-xl text-sm">
+                            Hapus
+                        </button>
+
+                    </form>
+                @endif
+            @endauth
 
         </div>
 

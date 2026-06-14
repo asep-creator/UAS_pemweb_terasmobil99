@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mobil;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class MobilController extends Controller
@@ -35,25 +36,34 @@ class MobilController extends Controller
         'gambar3' => 'nullable|image',
     ]);
 
+    $uploadedFiles = [];
+
     if ($request->hasFile('gambar1')) {
-        $data['gambar1'] = $request
-            ->file('gambar1')
-            ->store('mobil', 'public');
+        $uploadedFiles['gambar1'] = $request->file('gambar1')->store('mobil', 'public');
+        $data['gambar1'] = $uploadedFiles['gambar1'];
     }
 
     if ($request->hasFile('gambar2')) {
-        $data['gambar2'] = $request
-            ->file('gambar2')
-            ->store('mobil', 'public');
+        $uploadedFiles['gambar2'] = $request->file('gambar2')->store('mobil', 'public');
+        $data['gambar2'] = $uploadedFiles['gambar2'];
     }
 
     if ($request->hasFile('gambar3')) {
-        $data['gambar3'] = $request
-            ->file('gambar3')
-            ->store('mobil', 'public');
+        $uploadedFiles['gambar3'] = $request->file('gambar3')->store('mobil', 'public');
+        $data['gambar3'] = $uploadedFiles['gambar3'];
     }
 
-    Mobil::create($data);
+    try {
+        DB::transaction(function () use ($data) {
+            Mobil::create($data);
+        });
+    } catch (\Throwable $e) {
+        foreach ($uploadedFiles as $path) {
+            Storage::disk('public')->delete($path);
+        }
+
+        throw $e;
+    }
 
     return redirect()
         ->route('mobil.index')
@@ -85,43 +95,44 @@ class MobilController extends Controller
         'gambar3' => 'nullable|image',
     ]);
 
+    $uploadedFiles = [];
+    $oldFiles = [];
+
     if ($request->hasFile('gambar1')) {
-
-    if ($mobil->gambar1) {
-        Storage::disk('public')
-            ->delete($mobil->gambar1);
-    }
-
-    $data['gambar1'] =
-        $request->file('gambar1')
-        ->store('mobil','public');
+        $uploadedFiles['gambar1'] = $request->file('gambar1')->store('mobil', 'public');
+        $data['gambar1'] = $uploadedFiles['gambar1'];
+        $oldFiles[] = $mobil->gambar1;
     }
 
     if ($request->hasFile('gambar2')) {
-
-    if ($mobil->gambar2) {
-        Storage::disk('public')
-            ->delete($mobil->gambar2);
+        $uploadedFiles['gambar2'] = $request->file('gambar2')->store('mobil', 'public');
+        $data['gambar2'] = $uploadedFiles['gambar2'];
+        $oldFiles[] = $mobil->gambar2;
     }
-
-    $data['gambar2'] =
-        $request->file('gambar2')
-        ->store('mobil','public');
-    }   
 
     if ($request->hasFile('gambar3')) {
-
-    if ($mobil->gambar3) {
-        Storage::disk('public')
-            ->delete($mobil->gambar3);
+        $uploadedFiles['gambar3'] = $request->file('gambar3')->store('mobil', 'public');
+        $data['gambar3'] = $uploadedFiles['gambar3'];
+        $oldFiles[] = $mobil->gambar3;
     }
 
-    $data['gambar3'] =
-        $request->file('gambar3')
-        ->store('mobil','public');
+    try {
+        DB::transaction(function () use ($mobil, $data) {
+            $mobil->update($data);
+        });
+    } catch (\Throwable $e) {
+        foreach ($uploadedFiles as $path) {
+            Storage::disk('public')->delete($path);
+        }
+
+        throw $e;
     }
 
-    $mobil->update($data);
+    foreach ($oldFiles as $path) {
+        if ($path) {
+            Storage::disk('public')->delete($path);
+        }
+    }
 
     return redirect()
         ->route('mobil.index')
@@ -130,22 +141,27 @@ class MobilController extends Controller
 
     public function destroy(Mobil $mobil)
 {
+    $oldFiles = [];
+
     if ($mobil->gambar1) {
-        Storage::disk('public')
-            ->delete($mobil->gambar1);
+        $oldFiles[] = $mobil->gambar1;
     }
 
     if ($mobil->gambar2) {
-        Storage::disk('public')
-            ->delete($mobil->gambar2);
+        $oldFiles[] = $mobil->gambar2;
     }
 
     if ($mobil->gambar3) {
-        Storage::disk('public')
-            ->delete($mobil->gambar3);
+        $oldFiles[] = $mobil->gambar3;
     }
 
-    $mobil->delete();
+    DB::transaction(function () use ($mobil) {
+        $mobil->delete();
+    });
+
+    foreach ($oldFiles as $path) {
+        Storage::disk('public')->delete($path);
+    }
 
     return redirect()
         ->route('mobil.index')
