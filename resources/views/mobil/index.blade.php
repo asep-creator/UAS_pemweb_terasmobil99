@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="max-w-7xl mx-auto px-4 py-8">
+<div class="max-w-7xl mx-auto px-4 py-4">
 
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between mb-8">
         <div>
@@ -55,18 +55,18 @@
                                 Rp {{ number_format($m->harga,0,',','.') }}
                             </td>
                             <td class="px-4 py-4 align-top whitespace-nowrap text-sm text-gray-600 space-x-2">
-                                <a href="{{ route('mobil.show',$m->id) }}"
-                                   class="inline-flex items-center rounded-full bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-200 transition">
-                                   Detail
-                                </a>
                                 <a href="{{ route('mobil.edit',$m->id) }}"
                                    class="inline-flex items-center rounded-full bg-amber-100 px-3 py-2 text-sm font-medium text-amber-700 hover:bg-amber-200 transition">
                                    Edit
                                 </a>
-                                <a href="{{ route('pesanan.create',$m->id) }}"
-                                   class="inline-flex items-center rounded-full bg-emerald-500 px-3 py-2 text-sm font-semibold text-white hover:bg-emerald-600 transition">
-                                   Beli
-                                </a>
+
+                                <form action="{{ route('mobil.destroy', $m->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus mobil ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="inline-flex items-center rounded-full bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-700 transition">
+                                        Hapus
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

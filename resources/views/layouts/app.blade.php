@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 
-<main class="max-w-7xl mx-auto px-4 mt-12">
+<main class="max-w-7xl mx-auto px-4 mt-6">
     @if(session('success'))
         <div class="bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-xl mb-4">
             {{ session('success') }}
