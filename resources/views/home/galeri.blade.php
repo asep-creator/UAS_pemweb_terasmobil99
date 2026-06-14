@@ -133,36 +133,27 @@
                     class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl no-underline text-sm">
                     Detail
                 </a>
+
                 @auth
                     @if(auth()->user()->role === 'admin')
+
                         <a
                             href="{{ route('mobil.edit',$m->id) }}"
                             class="bg-gray-800 text-white px-4 py-2 rounded-xl no-underline text-sm">
                             Edit
                         </a>
+
+                        <form action="{{ route('mobil.destroy',$m->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus mobil ini?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-xl text-sm">
+                                Hapus
+                            </button>
+                        </form>
+
                     @endif
                 @endauth
             </div>
-
-            @auth
-                @if(auth()->user()->role === 'admin')
-                    <form
-                        action="{{ route('mobil.destroy',$m->id) }}"
-                        method="POST"
-                        onsubmit="return confirm('Yakin ingin menghapus mobil ini?');">
-
-                        @csrf
-                        @method('DELETE')
-
-                        <button
-                            type="submit"
-                            class="bg-red-600 text-white px-3 py-2 rounded-xl text-sm">
-                            Hapus
-                        </button>
-
-                    </form>
-                @endif
-            @endauth
 
         </div>
 
