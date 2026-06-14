@@ -33,9 +33,7 @@ class PesananController extends Controller
             'jenis' => $request->jenis,
         ]);
 
-        return redirect()
-            ->route('mobil.index')
-            ->with('success','Pesanan berhasil dibuat');
+            return view('pesanan.success');
     }
 
     public function index()

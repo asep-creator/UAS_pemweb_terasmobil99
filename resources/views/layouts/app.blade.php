@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             <div class="space-y-2 text-gray-300">
 
-                <p>📍 Jl. Raya Mobil No.99, Surabaya</p>
+                <p>📍 Jl. Raya Mobil No.99, Sidoarjo</p>
                 <p>📞 0812-3456-7890</p>
                 <p>✉️ info@terasmobil99.com</p>
 

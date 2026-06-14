@@ -73,7 +73,7 @@
 
 <div class="grid md:grid-cols-3 gap-6">
 
-    <div class="bg-red-50 rounded-[2rem] p-6 shadow-sm">
+    <div class="bg-red-100 rounded-[2rem] p-6 shadow-sm">
 
         <h3 class="font-bold text-xl mb-3">
             Mobil Berkualitas
@@ -85,7 +85,7 @@
 
     </div>
 
-    <div class="bg-red-50 rounded-[2rem] p-6 shadow-sm">
+    <div class="bg-red-100 rounded-[2rem] p-6 shadow-sm">
 
         <h3 class="font-bold text-xl mb-3">
             Harga Terbaik
@@ -97,7 +97,7 @@
 
     </div>
 
-    <div class="bg-red-50 rounded-[2rem] p-6 shadow-sm">
+    <div class="bg-red-100 rounded-[2rem] p-6 shadow-sm">
 
         <h3 class="font-bold text-xl mb-3">
             Proses Mudah
@@ -116,18 +116,21 @@
 
 <!-- TENTANG -->
 
-<section class="bg-white rounded-[2rem] p-10 text-center shadow-sm scroll-scale-up">
+<section class="bg-red-300 rounded-[2rem] p-10 text-center shadow-sm scroll-scale-up">
 
 <h2 class="text-4xl font-bold mb-5">
     Tentang Kami
 </h2>
 
-<p class="max-w-3xl mx-auto text-gray-600 leading-relaxed">
+<p class="max-w-3xl mx-auto text-black-800 leading-relaxed">
 
-    Teras Mobil 99 hadir sebagai solusi terpercaya untuk Anda yang
-    mencari mobil bekas berkualitas. Dengan pilihan mobil yang beragam,
-    harga transparan, serta proses pembelian yang mudah, kami siap
-    membantu Anda mendapatkan kendaraan terbaik sesuai kebutuhan.
+    Teras Mobil 99 merupakan showroom mobil bekas terpercaya yang berkomitmen
+    menyediakan berbagai pilihan kendaraan berkualitas dengan harga yang
+    transparan dan kompetitif. Setiap mobil yang tersedia telah melalui proses
+    pengecekan untuk memastikan kondisi yang layak dan siap digunakan oleh
+    pelanggan. Kepuasan pelanggan menjadi prioritas utama kami, sehingga Teras Mobil 99
+    terus menghadirkan solusi jual beli mobil bekas yang aman, nyaman, dan
+    terpercaya.
 
 </p>
 

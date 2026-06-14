@@ -149,6 +149,7 @@
                 </div>
 
                 <!-- CTA -->
+                @if(auth()->user()?->role !== 'admin')
                 <a
                     href="{{ route('pesanan.create',$mobil->id) }}"
                     class="inline-block bg-green-500 hover:bg-green-600 text-white text-center px-6 py-3 md:px-8 md:py-4 rounded-full font-semibold text-base md:text-lg no-underline transition">
@@ -156,6 +157,7 @@
                     Pesan Sekarang
 
                 </a>
+                @endif
 
             </div>
 
